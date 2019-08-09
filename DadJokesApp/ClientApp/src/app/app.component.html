@@ -1,0 +1,70 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+
+  <h3>Search for a Dad Joke</h3>
+  <mat-form-field class="example-form-field">
+    <input matInput type="text" placeholder="search for dad jokes..." [(ngModel)]="searchTerm"
+      (ngModelChange)="setSearch($event)" (keyup.enter)="searchDadJokes()">
+    <button mat-button *ngIf="SearchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="searchTerm=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <div class="search-button">
+      <button mat-raised-button (click)="searchDadJokes()">Search</button>
+  </div>
+
+  <h3>Or</h3>
+
+  <button mat-raised-button color="primary" (click)="setGenerateRandom()">Generate Random Jokes</button>
+  <p>This will toggle a random joke generator that creates a new joke every 10 seconds.</p>
+</div>
+<div *ngIf="loading">
+  <div class="spinner-background">
+    <div class="spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+</div>
+<div class="jokes-list" *ngIf="randomDadJokeSelected">
+  <div class="current-joke">
+    <div>{{recentJoke?.joke}}</div>
+    <div *ngIf="generatingNewJoke">Generating New Joke...</div>
+  </div>
+  <div class="joke-history">
+    <h3>Random Joke History</h3>
+    <ul *ngFor="let joke of jokeHistoryList">
+      <li>{{joke?.joke}}</li>
+    </ul>
+  </div>
+</div>
+<div *ngIf="!randomDadJokeSelected">
+  <div class="joke-results" *ngIf="shortJokes.length > 0 || mediumJokes.length > 0 || longJokes.length > 0">
+    <h2>Short Jokes</h2>
+    <ul *ngFor="let result of shortJokes">
+      <li [innerHTML]=result></li>
+    </ul>
+    <div *ngIf="shortJokes.length < 1">No Short Jokes</div>
+
+    <h2>Medium Jokes</h2>
+    <ul *ngFor="let result of mediumJokes">
+      <li [innerHTML]=result></li>
+    </ul>
+    <div *ngIf="mediumJokes.length < 1">No Medium Jokes</div>
+
+    <h2>Long Jokes</h2>
+    <ul *ngFor="let result of longJokes">
+      <li [innerHTML]=result></li>
+    </ul>
+    <div *ngIf="longJokes.length < 1">No Long Jokes</div>
+
+  </div>
+  <h3 *ngIf="shortJokes.length < 1 && mediumJokes.length < 1 && longJokes.length < 1 && searchTerm !== ''">No Search
+    Results</h3>
+</div>
+
+
+
+<router-outlet></router-outlet>

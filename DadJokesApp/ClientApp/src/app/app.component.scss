@@ -1,0 +1,40 @@
+.jokes-list {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+}
+
+.current-joke {
+    padding-top: 20px;
+    width: 50%
+}
+
+.joke-history {
+    width: 50%;
+}
+
+.highlight {
+    background-color: yellow;
+}
+
+.spinner {
+    position: absolute;
+    right: 50%;
+    left: 50%;
+    top: 50%;
+    bottom: 50%;
+  }
+  
+  .spinner-background {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .search-button {
+      display: inline;
+      margin-left: 20px;
+  }
